@@ -32,7 +32,7 @@ public final class PhoneNumberFactory {
     /**
      * @return an instance of PhoneNumber with randomly generated phone number value
      */ //TODO - Implement logic
-    public static PhoneNumber createRandomPhoneNumber() throws InvalidPhoneNumberFormatException{
+    public static PhoneNumber createRandomPhoneNumber() {
        int num1 = RandomNumberFactory.createInteger(100, 999);
         int num2 = RandomNumberFactory.createInteger(100, 999);
        int num3 = RandomNumberFactory.createInteger(1000, 9999);
@@ -47,7 +47,7 @@ public final class PhoneNumberFactory {
      * @param phoneLineCode     - 4 digit code
      * @return a new phone number object
      */ //TODO - if input is valid, return respective PhoneNumber object, else return null
-    public static PhoneNumber createPhoneNumberSafely (int areaCode, int centralOfficeCode, int phoneLineCode) throws InvalidPhoneNumberFormatException {
+    public static PhoneNumber createPhoneNumberSafely (int areaCode, int centralOfficeCode, int phoneLineCode) {
         String fullNumber = "(" + areaCode + ")" + "-" + centralOfficeCode + "-" + phoneLineCode;
 
         logger.log(Level.WARNING, fullNumber + " is not a valid phone number");
@@ -55,6 +55,7 @@ public final class PhoneNumberFactory {
         try {
             return createPhoneNumber(fullNumber);
         } catch (InvalidPhoneNumberFormatException i){
+            logger.log(Level.WARNING, fullNumber + " is not a valid phone number");
             return null;
         }
     }
@@ -65,7 +66,7 @@ public final class PhoneNumberFactory {
      * @throws InvalidPhoneNumberFormatException - thrown if phoneNumberString does not match acceptable format
      */ // TODO - Add throws statement to method signature
     public static PhoneNumber createPhoneNumber(String phoneNumberString) throws InvalidPhoneNumberFormatException {
-        PhoneNumber phoneNumber = new PhoneNumber("302-555-5555");
+        PhoneNumber phoneNumber = new PhoneNumber(phoneNumberString);
 
         logger.log(Level.INFO, "Attempting to create a new PhoneNumber object with a value of " + phoneNumberString);
 
